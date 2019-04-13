@@ -21,6 +21,11 @@ def train(out_dir, chkpt_path, trainset, valset, writer, logger, hp, hp_str, gra
         optimizer = adabound.AdaBound(model.parameters(),
                              lr=hp.train.adabound.initial,
                              final_lr=hp.train.adabound.final)
+    elif hp.train.optimizer == 'sgd':
+        optimizer = torch.optim.SGD(model.parameters(),
+                                    lr=hp.train.sgd.lr,
+                                    momentum=hp.train.sgd.momentum,
+                                    weight_decay=hp.train.sgd.weight_decay)
     else:
         raise Exception("Optimizer not supported: %s" % hp.train.optimizer)
 
@@ -40,7 +45,7 @@ def train(out_dir, chkpt_path, trainset, valset, writer, logger, hp, hp_str, gra
     else:
         logger.info("Starting new training run")
         logger.info("Writing graph to tensorboardX...")
-        writer.write_graph(model, torch.randn(7, 3, 224, 224).cuda())
+        writer.write_graph(model, torch.randn(7, hp.model.input_maps, 224, 224).cuda())
         logger.info("Finished.")
 
     try:
