@@ -7,7 +7,9 @@ Unofficial PyTorch Implementation of:
 
 ![](./assets/teaser.png)
 
-## Results
+## Results (To be fixed)
+
+Caveat: These are the results evaluated before fixing issue on random-graph generation. (See [#8](https://github.com/seungwonpark/RandWireNN/issues/8)) This will be updated.
 
 Validation result on Imagenet(ILSVRC2012) dataset:
 
